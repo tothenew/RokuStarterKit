@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="DialogUtility" extends="Group" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
+    
+     <interface>
+                  <field id="enableProgressDialog" type="boolean" alwaysNotify="true" onChange="onProgressDialogEnabled"/>
+                  <field id="disableProgressDialog" type="boolean" alwaysNotify="true" onChange="onProgressDialogDisabled"/>
+                  <field id="isProgressDialogVisible" type="boolean" alwaysNotify="true"/>
+                  
+                  <field id="enableErrorDialog" type="boolean" alwaysNotify="true" onChange="onErrorDialogEnabled"/>
+                  <field id="disableErrorDialog" type="boolean" alwaysNotify="true" onChange="onErrorDialogDisabled"/>
+                  <field id="isErrorDialogVisible" type="boolean" alwaysNotify="true"/>
+                  
+                  <field id="errorTitle" type="String" alwaysNotify="true"/>
+                  <field id="errorMessage" type="String" alwaysNotify="true"/>
+     </interface> 
+            
+	<script type="text/brightscript" uri="pkg:/components/CustomComponents/DialogUtility/DialogUtility.brs" />
+	<script type="text/brightscript"  uri="pkg:/source/AppUtilities/Utilities.brs"/>
+		   
+</component>

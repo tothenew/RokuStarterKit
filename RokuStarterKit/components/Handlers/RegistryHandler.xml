@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="RegistryHandler" extends="Group" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
+
+	<script type="text/brightscript" uri="pkg:/components/Handlers/RegistryHandler.brs" />
+	
+	      <interface>
+                <!--Generic Callback for the Registry  -->
+                <field id="setKeyValue" type="assocarray"  alwaysNotify="true" onChange="saveDataInRegistry" />
+                <field id="getValueOfKey" type="string"  alwaysNotify="true" onChange="getDataFromRegistry" />
+                <field id="deleteAllData" type="Boolean"  alwaysNotify="true" onChange="onDeleteAllData" />
+                <field id="returnValueOfKey" type="string" alwaysNotify="true"/>
+                <field id="keyToBeDeleted" type="string" alwaysNotify="true" onChange="deleteKeyFromRegistry" />
+         </interface>
+</component>
