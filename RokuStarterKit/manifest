@@ -6,4 +6,5 @@ mm_icon_focus_hd=pkg:/images/icon_focus_hd.png
 mm_icon_focus_sd=pkg:/images/icon_focus_sd.png
 splash_rsg_optimization=1
 ui_resolutions=fhd
+bs_libs_required=roku_ads_lib
 

@@ -27,7 +27,7 @@
                                                          lineSpacing="2" wrap="true" ellipsizeOnBoundary="true"
                                                           vertAlign="top"
                                                           isTextEllipsized="false"
-                                                          text="This starter kit contains some utility resources for any Roku app."
+                                                          text="This starter kit contains some utility resources for any Roku app. Press ok to play video"
                                                           height = "40" 
                                                           font="font:SmallSystemFont">
                                     </Label>

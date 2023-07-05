@@ -12,10 +12,9 @@ end sub
 ' ----------------------------------------------------------------
 REM : This method validates video url and configures video accordingly
 ' ----------------------------------------------------------------
-sub onScreenDataReceived()
-    m.top.getScene().currrentScreenReference = m.top
-    if m.top.screenData <> invalid
-        if m.top.screenData.streamURL <> invalid and m.top.screenData.streamURL.Len() <> 0
+sub onVideoScreenDataReceived()
+    if m.top.videoScreenData <> invalid
+        if m.top.videoScreenData.streamURL <> invalid and m.top.videoScreenData.streamURL.Len() <> 0
             confgureVideo()
         else
             showError("Video Url not found", "This video is not available")
@@ -36,27 +35,22 @@ sub confgureVideo()
     m.videoPlayer = m.top.findNode("videoPlayer")
     m.videoPlayer.observeField("state", "OnVideoPlayerStateChange")
 
-    videoContent = CreateObject("roSGNode", "ContentNode")
+    videoContentData = getVideoData()
+    
+    ' compile into a VideoContent node
+    content = CreateObject("roSGNode", "VideoContent")
+    content.setFields(videoContentData)
+    content.ad_url = "" 'Leaving it blank for this app. You should pass your url for live app
 
-    if m.top.screenData.licenseURL <> invalid and m.top.screenData.licenseURL.Len() <> 0
-        drmParams = {
-            keySystem: "widevine"
-            licenseServerURL: m.top.screenData.licenseURL
-        }
-        videoContent.drmParams = drmParams
-    end if
+    m.videoPlayer.content = content
+    m.videoPlayer.visible = false
 
-    videoContent.AdaptiveMaxStartBitrate = 564000
-    videoContent.AdaptiveMinStartBitrate = 16000
-
-    videoContent.url = m.top.screenData.streamURL
-    videoContent.streamFormat = getStreamFormat()
-    videoContent.title = m.top.screenData.title
-
-    m.videoPlayer.content = videoContent
-    m.videoPlayer.visible = true
-    m.videoPlayer.control = "play"
-    m.videoPlayer.setFocus(true)
+    m.PlayerTask = CreateObject("roSGNode", "PlayerTask")
+    m.PlayerTask.observeField("state", "taskStateChanged")
+    m.PlayerTask.video = m.videoPlayer
+    m.PlayerTask.control = "RUN"
+    'm.videoPlayer.control = "play"
+    'm.videoPlayer.setFocus(true)
 end sub
 
 ' ----------------------------------------------------------------

@@ -6,6 +6,7 @@ end sub
 
 sub showChannelSGScreen()
     screen = CreateObject("roSGScreen")
+
     m.port = CreateObject("roMessagePort")
     screen.setMessagePort(m.port)
     scene = screen.CreateScene("MainScene")
@@ -25,7 +26,7 @@ sub showChannelSGScreen()
     m.global.addFields({ buildNo: "" })
     m.global.addFields({ uidValue: ""})
     m.global.addFields({ modelName: ""})
-    
+    m.global.addFields({ isPaidUser: false})
     screen.show()
 
     while(true)

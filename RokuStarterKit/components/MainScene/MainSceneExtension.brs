@@ -40,7 +40,7 @@ sub getDeviceInformation()
 
        buildNo = appInfo.GetValue("build_version")
        m.global.buildNo = buildNo.toStr()
-              
+       m.top.setFocus(true)        
 end sub
 
 REM : **** This method presents Error Dialog ****
