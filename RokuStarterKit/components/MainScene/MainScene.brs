@@ -1,9 +1,10 @@
-' ********** Copyright 2016 Roku Corp.  All Rights Reserved. **********  
+' ********** Copyright 2016 Roku Corp.  All Rights Reserved. **********
 
 sub init()
     m.top.SetFocus(true)
     initComponents()
-End sub
+    m.global.channelStore = CreateObject("roSGNode", "ChannelStore")
+end sub
 
 sub goToPlayerScreen()
     movieData = {}
@@ -27,7 +28,7 @@ sub onRemovePlayerScreen()
     end if
 end sub
 
-function onKeyEvent(key as String, press as Boolean) as Boolean
+function onKeyEvent(key as string, press as boolean) as boolean
     result = false
     if press
         if key = "OK"
@@ -35,5 +36,5 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
             result = true
         end if
     end if
-    return result 
+    return result
 end function
