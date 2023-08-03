@@ -1,0 +1,13 @@
+enum RemoteButtons
+    back = "back"
+    up = "up"
+    left = "left"
+    right = "right"
+    OK = "OK"
+    replay = "replay"
+    play = "play"
+    playonly = "playonly"
+    rewing = "rewind"
+    fastforward = "fastforward"
+    options = "options"
+end enum

@@ -1,0 +1,22 @@
+' ********** Copyright 2016 Roku Corp.  All Rights Reserved. **********
+import "pkg:/source/Constants/Colors/Remote/Buttons.bs"
+import "pkg:/components/MainScene/MainSceneExtension.bs"
+import "pkg:/components/MainScene/MainSceneViewModel.bs"
+import "pkg:/components/MainScene/ChannelStoreHelper/ChannelStoreHelper.bs"
+
+sub init()
+    m.top.SetFocus(true)
+    m.global.channelStore = CreateObject("roSGNode", "ChannelStore")
+    MainSceneExtension.initComponents()
+end sub
+
+function onKeyEvent(key as string, press as boolean) as boolean
+    result = false
+    if press
+        if key = RemoteButtons.OK
+            MainSceneViewModel.gotoPlayerScreen()
+            result = true
+        end if
+    end if
+    return result
+end function

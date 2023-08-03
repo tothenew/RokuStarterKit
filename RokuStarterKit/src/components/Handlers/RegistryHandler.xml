@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="RegistryHandler"
+    extends="Group">
+
+    <interface>
+        <!--Generic Callback for the Registry  -->
+        <field id="setKeyValue"
+            type="assocarray"
+            alwaysNotify="true"
+            onChange="saveDataInRegistry" />
+        <field id="getValueOfKey"
+            type="string"
+            alwaysNotify="true"
+            onChange="getDataFromRegistry" />
+        <field id="deleteAllData"
+            type="Boolean"
+            alwaysNotify="true"
+            onChange="onDeleteAllData" />
+        <field id="returnValueOfKey"
+            type="string"
+            alwaysNotify="true" />
+        <field id="keyToBeDeleted"
+            type="string"
+            alwaysNotify="true"
+            onChange="deleteKeyFromRegistry" />
+    </interface>
+</component>

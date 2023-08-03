@@ -1,0 +1,15 @@
+{
+  "name": "rokustarterkit",
+  "version": "1.0.0",
+  "description": "Simple Roku Scene Graph channel containing an empty scene. This can be enhanced with the following features: 1)      Add grid with video preview (this adds the video grid) 2)      Add loading indicator component",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "brighterscript": "^0.65.2"
+  }
+}

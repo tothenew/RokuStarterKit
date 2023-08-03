@@ -1,0 +1,52 @@
+REM : **** This file contains all the validation code ****
+
+namespace validator
+    REM : **** This method validates Email field ****
+    function emailValidation(textToDisplay as string)
+        checkRegex = CreateObject("roRegex", "[_A-Za-z0-9-\\+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})", "i")
+        arrayForValidation = []
+        arrayForValidation = checkRegex.Match(textToDisplay)
+        return arrayForValidation
+    end function
+
+    REM : **** This method validates spacial characters in a string ****
+    function specialCharValidation(textToDisplay as string)
+        checkRegex = CreateObject("roRegex", "^[A-Za-z ]+$", "i")
+        arrayForValidation = []
+        arrayForValidation = checkRegex.Match(textToDisplay)
+        return arrayForValidation
+    end function
+
+    REM : **** This method validates Phone Number ****
+    function phoneValidation(textToDisplay as string)
+        checkRegex = CreateObject("roRegex", "[0-9]+", "i")
+        arrayForValidation = []
+        arrayForValidation = checkRegex.Match(textToDisplay)
+        return arrayForValidation
+    end function
+
+    REM : **** This method validates Pin ****
+    function pinValidation(textToDisplay as string)
+        checkRegex = CreateObject("roRegex", "[0-9]+", "i")
+        arrayForValidation = []
+        arrayForValidation = checkRegex.Match(textToDisplay)
+        return arrayForValidation
+    end function
+
+    REM : **** This method validates a string for numeric values ****
+    function validateNumericText(textToDisplay as string) as boolean
+        otherCharFound = false
+        componentsArray = textToDisplay.Split("")
+        for index = 0 to componentsArray.Count() - 1
+            inputIntValue = componentsArray[index].toInt()
+            if inputIntValue = 0
+                if componentsArray[index] = "0"
+                else
+                    otherCharFound = true
+                    exit for
+                end if
+            end if
+        end for
+        return otherCharFound
+    end function
+end namespace

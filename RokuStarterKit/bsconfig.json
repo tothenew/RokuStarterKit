@@ -1,0 +1,9 @@
+{
+    "rootDir": "src",
+    "stagingDir": "dist",
+    "retainStagingDir": true,
+    "createPackage": true,
+    "sourceMap": true,
+    "allowBrighterScriptInBrightScript": false,
+    "autoImportComponentScript": true
+}

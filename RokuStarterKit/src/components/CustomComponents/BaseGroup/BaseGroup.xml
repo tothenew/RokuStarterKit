@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="BaseGroup"
+    extends="Group">
+
+    <interface>
+        <field id="parentNode"
+            type="node"
+            alwaysNotify="true" />
+        <field id="setInitialFocus"
+            type="bool"
+            alwaysNotify="true"
+            onChange="onSetInitialFocus" />
+    </interface>
+
+    <children>
+    </children>
+
+</component>

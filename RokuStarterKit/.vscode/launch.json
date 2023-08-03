@@ -8,9 +8,10 @@
             "name": "BrightScript Debug: Launch",
             "type": "brightscript",
             "request": "launch",
-            "host": "${promptForHost}",
-            "password": "${promptForPassword}",
-            "rootDir": "${workspaceFolder}"
+            "host": "10.1.209.165",
+            "password": "123123",
+            "rootDir": "${workspaceFolder}/dist",
+            "preLaunchTask": "build"
         }
     ]
 }
