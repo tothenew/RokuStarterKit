@@ -16,6 +16,6 @@ class MainSceneEventHandler
     end function
 
     sub _handleOkPress()
-        m.viewModel.gotoPlayerScreen()
+        gotoPlayerScreen()
     end sub
 end class

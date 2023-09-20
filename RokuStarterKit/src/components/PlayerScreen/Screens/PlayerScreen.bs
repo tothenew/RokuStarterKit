@@ -7,6 +7,15 @@ REM : All UI components are being intialized here
 ' ----------------------------------------------------------------
 sub init()
     m.top.setFocus(true)
+    bindViewModel()
+end sub
+
+sub bindViewModel()
+    m.viewModel = new PlayerViewModel()
+end sub
+
+sub OnVideoPlayerStateChange()
+    m.viewModel.playerStateChanged(m.videoPlayer.state)
 end sub
 
 sub onArgsReceived()
@@ -14,6 +23,34 @@ sub onArgsReceived()
     if m.top.args.videoScreenData <> invalid
         onVideoScreenDataReceived()
     end if
+end sub
+
+sub playbackErrorReceived()
+    if m.viewModel.playerError = true
+        m.showError("Error!", "Something went wrong, please try again.")
+    end if
+end sub
+
+' ----------------------------------------------------------------
+REM : This method takes useer to Movie Screen
+' ----------------------------------------------------------------
+sub goBackToHomeScreen()
+    if m.videoPlayer <> invalid
+        m.videoPlayer.unobserveField("state")
+        m.videoPlayer.control = "stop"
+        m.videoPlayer = invalid
+    end if
+    m.PlayerTask = invalid
+    m.top.removePlayerScreen = true
+end sub
+
+' ----------------------------------------------------------------
+REM : This method presents error dialog
+' ----------------------------------------------------------------
+sub showError(errorTitle as string, errorMessage as string)
+    m.top.getScene().errorTitle = errorTitle
+    m.top.getScene().errorMessage = errorMessage
+    m.top.getScene().showErrorDialog = true
 end sub
 
 ' ----------------------------------------------------------------
@@ -41,7 +78,7 @@ sub confgureVideo()
     m.videoPlayer = m.top.findNode("videoPlayer")
     m.videoPlayer.observeField("state", "OnVideoPlayerStateChange")
 
-    videoContentData = getVideoData()
+    videoContentData = m.viewModel.getVideoData(m.top.args.videoScreenData)
 
     ' compile into a VideoContent node
     content = CreateObject("roSGNode", "VideoContent")
@@ -57,6 +94,17 @@ sub confgureVideo()
     m.PlayerTask.control = "RUN"
     'm.videoPlayer.control = "play"
     'm.videoPlayer.setFocus(true)
+end sub
+
+' ----------------------------------------------------------------
+REM : This method gets called whenever state of video player is changed
+' ----------------------------------------------------------------
+sub taskStateChanged(event as object)
+    print "Player: taskStateChanged(), id = "; event.getNode(); ", "; event.getField(); " = "; event.getData()
+    state = event.GetData()
+    if state = "done" or state = "stop"
+        goBackToHomeScreen()
+    end if
 end sub
 
 ' ----------------------------------------------------------------
