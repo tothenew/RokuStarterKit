@@ -8,10 +8,11 @@
             "name": "BrightScript Debug: Launch",
             "type": "brightscript",
             "request": "launch",
-            "host": "10.1.209.165",
+            "host": "10.1.210.253",
             "password": "123123",
             "rootDir": "${workspaceFolder}/dist",
-            "preLaunchTask": "build"
+            "preLaunchTask": "build",
+            "internalConsoleOptions": "openOnSessionStart"
         }
     ]
 }

@@ -32,6 +32,11 @@
         <field id="errorMessage"
             type="String"
             alwaysNotify="true" />
+        <field id="navigationController"
+            type="assocarray" />
+
+        <function name="gotoPlayerScreen" />
+        <function name="dismissPlayerScreen" />
     </interface>
 
     <children>

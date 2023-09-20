@@ -10,6 +10,8 @@
             type="bool"
             alwaysNotify="true"
             onChange="onSetInitialFocus" />
+        <field id="navigationController"
+            type="assocarray" />
     </interface>
 
     <children>

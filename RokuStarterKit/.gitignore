@@ -9,6 +9,10 @@ out/*.*
 dist/
 dist/*
 dist/*.*
+./out/*.*
+./dist/*.*
+./out/*
+./dist/*
 
 # VSCode
 .vscode

@@ -9,16 +9,22 @@ sub init()
     m.top.setFocus(true)
 end sub
 
+sub onArgsReceived()
+    args = m.top.args
+    if m.top.args.videoScreenData <> invalid
+        onVideoScreenDataReceived()
+    end if
+end sub
+
 ' ----------------------------------------------------------------
 REM : This method validates video url and configures video accordingly
 ' ----------------------------------------------------------------
 sub onVideoScreenDataReceived()
-    if m.top.videoScreenData <> invalid
-        if m.top.videoScreenData.streamURL <> invalid and m.top.videoScreenData.streamURL.Len() <> 0
-            confgureVideo()
-        else
-            showError("Video Url not found", "This video is not available")
-        end if
+    args = m.top.args
+    if args.videoScreenData.streamURL <> invalid and args.videoScreenData.streamURL.Len() <> 0
+        confgureVideo()
+    else
+        showError("Video Url not found", "This video is not available")
     end if
 end sub
 
@@ -36,7 +42,7 @@ sub confgureVideo()
     m.videoPlayer.observeField("state", "OnVideoPlayerStateChange")
 
     videoContentData = getVideoData()
-    
+
     ' compile into a VideoContent node
     content = CreateObject("roSGNode", "VideoContent")
     content.setFields(videoContentData)
@@ -56,7 +62,7 @@ end sub
 ' ----------------------------------------------------------------
 REM : This method gets called when any remote key is pressed at Player Screen
 ' ----------------------------------------------------------------
-function onKeyEvent(key as String, press as Boolean) as Boolean
+function onKeyEvent(key as string, press as boolean) as boolean
     result = true
     if press
         if key = "back"

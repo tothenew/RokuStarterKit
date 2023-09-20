@@ -5,9 +5,10 @@
     <interface>
         <field id="removePlayerScreen"
             type="Boolean"
-            alwaysNotify="true" />
-        <field id="videoScreenData"
-            type="assocarray"
+            alwaysNotify="true"
+            value="true" />
+        <field id="args"
+            type="assocArray"
             alwaysNotify="true"
             onChange="onVideoScreenDataReceived" />
     </interface>

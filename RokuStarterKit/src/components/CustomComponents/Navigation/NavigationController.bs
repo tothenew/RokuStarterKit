@@ -1,0 +1,91 @@
+' Represents a navigation action such as push: add or pop: remove
+enum NavAction
+    add
+    remove
+end enum
+
+' NavigationStackItem represents an item in the navigation stack
+class NavigationStackItem
+    ' Add any required properties here
+    ViewName as string
+    Args as object
+end class
+
+' NavigationController manages the navigation stack and provides functions for pushing, popping, and managing view stack operations
+class NavigationController
+    ' Create a stack for managing navigation
+    private stack as object = []
+    public rootView as object = invalid
+
+    sub new(view as object)
+        m.rootView = view
+    end sub
+
+    ' Push a view onto the stack
+    public function PushView(viewName as string, args = invalid as object) as dynamic
+        ' Create a new item and add it to the stack
+        m.stack.push({
+            node : invalid,
+            viewName : viewName,
+            args : args
+        })
+        ' Call the function to display the new view
+        return m.ShowCurrentView(NavAction.add)
+    end function
+
+    ' Pop the top view from the stack
+    public function PopView()
+        ' Call the function to display the previous view
+        m.ShowCurrentView(NavAction.remove)
+
+        ' Remove the top item from the stack
+        m.stack.pop()
+    end function
+
+    ' Show the current view on the screen
+    private sub ShowCurrentView(action as NavAction) as dynamic
+        if m.stack.count() > 0 then
+            ' Get the top item from the stack
+            item = m.stack[m.stack.count() - 1]
+            ' Display the view using the specified name and arguments
+            if action = 0
+                newView = m.displayView(item.viewName, item.args)
+                item.node = newView
+                return newView
+            else
+                ' set focus to item view
+                item = m.stack[m.stack.count() - 1]
+                newTopView = m.stack[m.stack.count() - 2]
+                topView = item.node
+                m.rootView.removeChild(topView)
+                if newTopView <> invalid
+                    newTopView.setFocus(true)
+                else
+                    m.rootView.setFocus(true)
+                end if
+            end if
+        else
+            ' Stack is empty, display a default view or take any alternative action
+            m.displayDefaultView()
+            return invalid
+        end if
+    end sub
+
+    ' Function to display a view based on its name and arguments
+    private sub displayView(viewName, args) as dynamic
+        ' Implement your logic here to display the view based on its name
+        ' Example: You can use a predefined set of SceneGraph components to represent different views and use them as templates to display the actual views on the screen
+        ' You can also handle arguments (if any) and pass them to the view components for customization
+        newView = m.rootView.createChild(viewName)
+        newView.setFocus(true)
+        newView.args = args
+        newView.navigationController = m
+        return newView
+    end sub
+
+    ' Function to display a default view or take any alternative action when the stack is empty
+    private sub displayDefaultView()
+        ' Implement your logic here to handle the empty stack scenario
+        m.rootView.setFocus(true)
+    end sub
+end class
