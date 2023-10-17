@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="BaseScene"
+    extends="Scene">
+
+    <interface>
+        <field id="didGainFocus"
+            type="boolean"
+            onChange="didGainFocus"
+            alwaysNotify="true" />
+    </interface>
+</component>

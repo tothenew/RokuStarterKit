@@ -1,0 +1,16 @@
+import "pkg:/source/ApiHandler/Requests.bs"
+
+sub init()
+    m.top.functionName = "loadContent"
+end sub
+
+sub loadContent()
+    endpointURL = "https://basic-blog.prismic.io/api/v2/documents/search?ref=Wh3rNSEAADqKYyzq"
+    headers = {
+        "Accept" : "application/json",
+        "Content-Type" : "application/json"
+    }
+
+    r = Requests().get(endpointURL, { "headers" : headers })
+    m.top.homePageResponse = r
+end sub

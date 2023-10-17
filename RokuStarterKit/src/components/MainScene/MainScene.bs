@@ -1,5 +1,5 @@
 ' ********** Copyright 2016 Roku Corp.  All Rights Reserved. **********
-import "pkg:/source/Constants/Colors/Remote/Buttons.bs"
+import "pkg:/source/Constants/Remote/Buttons.bs"
 import "pkg:/components/MainScene/MainSceneExtension.bs"
 import "pkg:/components/MainScene/MainSceneViewModel.bs"
 import "pkg:/components/MainScene/MainSceneEventHandler.bs"
@@ -9,19 +9,21 @@ import "pkg:/components/MainScene/ChannelStoreHelper/ChannelStoreHelper.bs"
 sub init()
     m.top.SetFocus(true)
     m.global.channelStore = CreateObject("roSGNode", "ChannelStore")
-    m.viewModel = new MainSceneViewModel()
-    m.eventHandler = new MainSceneEventHandler(m.viewModel)
     m.navigationController = new NavigationController(m.top)
+    m.global.navigationController = m.navigationController
+    m.buttonPlayer = m.top.findNode("PlayerNavButton")
+    m.buttonPlayer.ObserveField("buttonSelected", "gotoPlayerScreen")
     MainSceneExtension.initComponents()
+    getHomePageData()
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
-    result = m.eventHandler.handleEvent(key, press)
+    result = MainSceneEventHandler.handleEvent(key, press)
     return result
 end function
 
 sub gotoPlayerScreen()
-    movieData = m.viewModel.getMovieDataForPlayer()
+    movieData = MainSceneVM.getMovieDataForPlayer()
     m.playerScreen = m.navigationController.PushView("PlayerScreen", { "videoScreenData" : movieData })
     m.playerScreen.ObserveField("removePlayerScreen", "dismissPlayerScreen")
 end sub
@@ -30,5 +32,17 @@ sub dismissPlayerScreen()
     if m.playerScreen <> invalid
         m.navigationController.PopView()
         m.playerScreen = invalid
+    end if
+end sub
+
+sub getHomePageData()
+    onProgressDialogEnabled()
+    MainSceneVM.fetchHomePageData()
+end sub
+
+sub onHomePageDataUpdate()
+    onProgressDialogDisabled()
+    if m.homePageData <> invalid
+        m.focusManager.setFocus(m.buttonPlayer)
     end if
 end sub

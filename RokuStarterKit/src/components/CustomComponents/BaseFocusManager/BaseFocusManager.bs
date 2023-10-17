@@ -1,0 +1,30 @@
+class BaseFocusManager
+    private owner as object
+    private activeNodeBuffer as object
+
+    sub new(parent as object)
+        m.owner = parent
+    end sub
+
+    public function setFocus(node as object) as boolean
+        if type(node) = "roSGNode"
+            node.setFocus(true)
+            m.activeNodeBuffer = node
+            return true
+        end if
+        return false
+    end function
+
+    public function setFocusToActiveNode() as boolean
+        if m.activeNodeBuffer <> invalid
+            m.activeNodeBuffer.setFocus(true)
+            return true
+        else
+            return false
+        end if
+    end function
+
+    public sub didGainFocus()
+        m.setFocusToActiveNode()
+    end sub
+end class

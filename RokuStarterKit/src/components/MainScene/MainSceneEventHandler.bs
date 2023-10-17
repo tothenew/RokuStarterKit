@@ -1,8 +1,5 @@
-class MainSceneEventHandler
-    viewModel as object
-
-    sub new(viewModel as object)
-        m.viewModel = viewModel
+namespace MainSceneEventHandler
+    sub new()
     end sub
 
     function handleEvent(key as RemoteButtons, press as boolean) as boolean
@@ -18,4 +15,4 @@ class MainSceneEventHandler
     sub _handleOkPress()
         gotoPlayerScreen()
     end sub
-end class
+end namespace

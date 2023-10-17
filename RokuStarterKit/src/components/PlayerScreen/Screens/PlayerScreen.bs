@@ -1,7 +1,7 @@
 ' ----------------------------------------------------------------
 REM : This component contains some configuration & focus handling related code for Player Screen
 ' ----------------------------------------------------------------
-
+import "pkg:/components/PlayerScreen/ViewModel/PlayerScreenViewModel.bs"
 ' ----------------------------------------------------------------
 REM : All UI components are being intialized here
 ' ----------------------------------------------------------------
@@ -35,11 +35,6 @@ end sub
 REM : This method takes useer to Movie Screen
 ' ----------------------------------------------------------------
 sub goBackToHomeScreen()
-    if m.videoPlayer <> invalid
-        m.videoPlayer.unobserveField("state")
-        m.videoPlayer.control = "stop"
-        m.videoPlayer = invalid
-    end if
     m.PlayerTask = invalid
     m.top.removePlayerScreen = true
 end sub

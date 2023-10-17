@@ -13,9 +13,6 @@
             onChange="onVideoScreenDataReceived" />
     </interface>
 
-    <script type="text/brightscript"
-        uri="pkg:/components/PlayerScreen/ViewModel/PlayerScreenViewModel.bs" />
-
     <children>
         <Rectangle id="parentRectangle"
             width="1920"

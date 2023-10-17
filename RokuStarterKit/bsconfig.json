@@ -4,6 +4,12 @@
     "retainStagingDir": true,
     "createPackage": true,
     "sourceMap": true,
-    "allowBrighterScriptInBrightScript": false,
-    "autoImportComponentScript": true
+    "allowBrighterScriptInBrightScript": true,
+    "autoImportComponentScript": true,
+    "files": [
+        "manifest",
+        "source/**/*.*",
+        "components/**/*.*",
+        "images/**/*.*"
+    ]
 }

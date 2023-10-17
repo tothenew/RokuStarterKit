@@ -1,8 +1,33 @@
-class MainSceneViewModel
+namespace MainSceneVM
     function getMovieDataForPlayer() as object
         movieData = {}
         'http://roku.cpl.delvenetworks.com/media/59021fabe3b645968e382ac726cd6c7b/decbe34b64ea4ca281dc09997d0f23fd/aac0cfc54ae74fdfbb3ba9a2ef4c7080/117_segment_2_twitch__nw_060515.mp4
         movieData.AddReplace("streamURL", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")
         return movieData
     end function
-end class
+
+    function fetchHomePageData() as object
+        m.contentLoadTask = CreateObject("roSGNode", "HomePageDataTask") ' Create XML parsing node task
+        m.contentLoadTask.observeField("homePageResponse", "MainSceneVM_homePageDataTaskResponseReceived")
+        m.contentLoadTask.control = "RUN" ' Run the task node
+    end function
+
+    function homePageDataTaskResponseReceived(msg as object)
+        ?"homePageDataTaskResponseReceived"
+        if Type(msg) = "roSGNodeEvent" and msg.getField() = "homePageResponse"
+            m.contentLoadTask = invalid
+            statusCode = msg.getData().statuscode
+            if msg <> invalid and msg.getData() <> invalid
+                if statuscode = 200
+                    ?"Success"
+                    m.homePageData = msg.getData().json
+                    onHomePageDataUpdate()
+                else
+                    ?"Failure"
+                end if
+            else
+                ?"Error"
+            end if
+        end if
+    end function
+end namespace

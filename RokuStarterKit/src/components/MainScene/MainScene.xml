@@ -3,7 +3,7 @@
 <!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
 
 <component name="MainScene"
-    extends="Scene"
+    extends="BaseScene"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
 
@@ -16,7 +16,6 @@
             type="boolean"
             alwaysNotify="true"
             onChange="onProgressDialogHidden" />
-
         <field id="showErrorDialog"
             type="boolean"
             alwaysNotify="true"
@@ -25,18 +24,14 @@
             type="boolean"
             alwaysNotify="true"
             onChange="onErrorDialogHidden" />
-
         <field id="errorTitle"
             type="String"
             alwaysNotify="true" />
         <field id="errorMessage"
             type="String"
             alwaysNotify="true" />
-        <field id="navigationController"
-            type="assocarray" />
-
-        <function name="gotoPlayerScreen" />
-        <function name="dismissPlayerScreen" />
+        <field id="isprogressdialogvisible"
+            type="Boolean" />
     </interface>
 
     <children>
@@ -45,21 +40,27 @@
             height="1080"
             translation="[0,0]"
             color="#000000">
-
-            <Label id="tempLabel"
-                horizAlign="center"
-                translation="[0,520]"
-                width="1920"
-                color="#9E9E9E"
-                lineSpacing="2"
-                wrap="true"
-                ellipsizeOnBoundary="true"
-                vertAlign="top"
-                isTextEllipsized="false"
-                text="This starter kit contains some utility resources for any Roku app. Press ok to play video"
-                height="40"
-                font="font:SmallSystemFont">
-            </Label>
+            <LayoutGroup vertAlignment="center"
+                horizAlignment="center"
+                translation="[960, 540]"
+                layoutDirection="vert">
+                <Label id="tempLabel"
+                    horizAlign="center"
+                    translation="[0,520]"
+                    width="1920"
+                    color="#9E9E9E"
+                    lineSpacing="2"
+                    wrap="true"
+                    ellipsizeOnBoundary="true"
+                    vertAlign="top"
+                    isTextEllipsized="false"
+                    text="This starter kit contains some utility resources for any Roku app. Press ok to play video"
+                    height="40"
+                    font="font:SmallSystemFont">
+                </Label>
+                <Button id="PlayerNavButton"
+                    text="Click" />
+            </LayoutGroup>
         </Rectangle>
     </children>
 </component>

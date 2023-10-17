@@ -28,6 +28,7 @@ sub showChannelSGScreen()
     m.global.addFields({ modelName : "" })
     m.global.addFields({ isPaidUser : false })
     m.global.addField("channelStore", "node", false)
+    m.global.addField("navigationController", "assocarray", false)
     screen.show()
 
     while(true)

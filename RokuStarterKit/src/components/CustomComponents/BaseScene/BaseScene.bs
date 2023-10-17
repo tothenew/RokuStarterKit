@@ -1,12 +1,8 @@
 import "pkg:/components/CustomComponents/BaseFocusManager/BaseFocusManager.bs"
+import "pkg:/components/CustomComponents/DialogUtility/DialogUtility.bs"
 
 sub init()
-    m.navigationController = m.global.navigationController
     m.focusManager = new BaseFocusManager(m.top)
-end sub
-
-REM : **** Default Implementations ****
-sub onSetInitialFocus()
 end sub
 
 sub didGainFocus()

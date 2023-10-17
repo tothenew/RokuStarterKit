@@ -60,8 +60,12 @@ class NavigationController
                 m.rootView.removeChild(topView)
                 if newTopView <> invalid
                     newTopView.setFocus(true)
+                    if type(newTopView) = "BaseGroup"
+                        newTopView.didGainFocus = true
+                    end if
                 else
                     m.rootView.setFocus(true)
+                    m.rootView.didGainFocus = true
                 end if
             end if
         else
@@ -79,7 +83,6 @@ class NavigationController
         newView = m.rootView.createChild(viewName)
         newView.setFocus(true)
         newView.args = args
-        newView.navigationController = m
         return newView
     end sub
 
@@ -87,5 +90,6 @@ class NavigationController
     private sub displayDefaultView()
         ' Implement your logic here to handle the empty stack scenario
         m.rootView.setFocus(true)
+        m.rootView.focusManager.didGainFocus()
     end sub
 end class
