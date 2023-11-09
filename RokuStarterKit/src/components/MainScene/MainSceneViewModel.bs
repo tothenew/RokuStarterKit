@@ -13,7 +13,6 @@ namespace MainSceneVM
     end function
 
     function homePageDataTaskResponseReceived(msg as object)
-        ?"homePageDataTaskResponseReceived"
         if Type(msg) = "roSGNodeEvent" and msg.getField() = "homePageResponse"
             m.contentLoadTask = invalid
             statusCode = msg.getData().statuscode
