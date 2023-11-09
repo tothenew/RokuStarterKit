@@ -1,11 +1,8 @@
 namespace MainSceneEventHandler
-    sub new()
-    end sub
-
     function handleEvent(key as RemoteButtons, press as boolean) as boolean
         if press
             if key = RemoteButtons.OK
-                m._handleOkPress()
+                _handleOkPress()
                 result = true
             end if
         end if
