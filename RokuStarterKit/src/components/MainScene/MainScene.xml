@@ -39,7 +39,7 @@
             width="1920"
             height="1080"
             translation="[0,0]"
-            color="#000000">
+            color="#343d46ff">
             <LayoutGroup vertAlignment="center"
                 horizAlignment="center"
                 translation="[960, 540]"
@@ -63,6 +63,36 @@
                     text="Click" />
                 <UIButton id="PlayerNavUIButton" />
             </LayoutGroup>
+        </Rectangle>
+
+        <Rectangle id="smRect"
+            translation="[0, 0]"
+            width="200"
+            height="1080"
+            color="#c6d3e3FF">
+            <Label id="smLabel1"
+                horizAlign="center"
+                translation="[4,24]"
+                width="192"
+                color="#000000ff"
+                lineSpacing="2"
+                wrap="true"
+                vertAlign="center"
+                text="Press left and/or right to see demo of a working sidemenu animation"
+                height="1032"
+                font="font:MediumSystemFont" />
+            <Label id="smLabel2"
+                horizAlign="center"
+                translation="[4,656]"
+                width="192"
+                color="#0x9400D3"
+                lineSpacing="2"
+                wrap="true"
+                vertAlign="center"
+                text="Created using 'animate.bs'"
+                height="400"
+                opacity="0.0"
+                font="font:MediumSystemFont" />
         </Rectangle>
     </children>
 </component>

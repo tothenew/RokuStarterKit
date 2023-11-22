@@ -5,6 +5,7 @@ import "pkg:/components/MainScene/MainSceneViewModel.bs"
 import "pkg:/components/MainScene/MainSceneEventHandler.bs"
 import "pkg:/components/CustomComponents/Navigation/NavigationController.bs"
 import "pkg:/components/MainScene/ChannelStoreHelper/ChannelStoreHelper.bs"
+import "pkg:/source/AppUtilities/animate.bs"
 
 sub init()
     m.top.SetFocus(true)
@@ -19,8 +20,86 @@ sub init()
     m.playerUIButton.title = "Play Video"
     m.playerUIButton.image = "pkg:/images/icon_play.png"
 
+    m.sidemenu = m.top.findNode("smRect")
+
     MainSceneExtension.initComponents()
     getHomePageData()
+end sub
+
+sub startAnimatingLeft()
+    if m.animation <> invalid
+        m.animation.control = "stop"
+    end if
+    m.animation = animate.timeline({
+        targets : m.sidemenu,
+        duration : 2,
+        autoplay : true
+    }).add({
+        width : 350,
+        color : "#98bad5FF"
+    }).add({
+        targets : "smLabel1",
+        width : 192 + 150,
+        height : 632,
+        color : "0xFFFFFFFF"
+    }).add({
+        targets : "smLabel2",
+        width : 192 + 150,
+        opacity : 1.0,
+        color : "0x9400D3"
+    }).getAnimation()
+
+    m.shimmer = animate.timeline({
+        targets : "smLabel2",
+        duration : 1,
+        autoplay : true,
+        sequential : true,
+        repeat : true
+    }).add({
+        color : "0x9400D3"
+    }).add({
+        color : "0x4B0082"
+    }).add({
+        color : "0x0000FF"
+    }).add({
+        color : "0x00FF00"
+    }).add({
+        color : "0xFFFF00"
+    }).add({
+        color : "0xFF7F00"
+    }).add({
+        color : "0xFF0000"
+    }).getAnimation()
+
+    m.animation.control = "start"
+    m.shimmer.control = "start"
+end sub
+
+sub startAnimatingRight()
+    m.shimmer.control = "stop"
+    if m.animation <> invalid
+        m.animation.control = "stop"
+    end if
+    m.animation = animate.timeline({
+        targets : m.sidemenu,
+        duration : 2,
+        autoplay : true
+    }).add({
+        width : 200,
+        color : "#c6d3e3FF"
+    }).add({
+        targets : "smLabel1",
+        width : 192,
+        height : 1032,
+        color : "0x000000FF"
+    }).add({
+        targets : "smLabel2",
+        width : 192,
+        opacity : 0.0,
+        color : "0x9400D3"
+    }).getAnimation()
+
+    m.animation.control = "start"
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean

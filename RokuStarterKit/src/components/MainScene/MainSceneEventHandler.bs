@@ -11,6 +11,10 @@ namespace MainSceneEventHandler
             _handleDownPress()
         else if key = RemoteButtons.up
             _handleUpPress()
+        else if key = RemoteButtons.left
+            startAnimatingLeft()
+        else if key = RemoteButtons.right
+            startAnimatingRight()
         end if
 
         return true
