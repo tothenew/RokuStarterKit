@@ -96,11 +96,6 @@ sub setLayout()
     m.layoutHelper.translation = [m.container.width / 2, m.container.height / 2]
     m.bgPoster.width = m.container.width
     m.bgPoster.height = m.container.height
-    ?m.iconPoster
-
-    ?"---"
-    ?m.top.image
-    ?"---"
 end sub
 
 '
