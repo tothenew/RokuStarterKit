@@ -1,6 +1,8 @@
 REM : **** This class contains some utilities methods which are to be used throughout the application ****
 
 namespace utils
+    const INVALID_IMAGE_URI = "pkg:/S"
+
     REM : **** This method validates device's internet status and returns flag accordingly ****
     function checkInternetConection() as boolean
         isInternetAvailable = false

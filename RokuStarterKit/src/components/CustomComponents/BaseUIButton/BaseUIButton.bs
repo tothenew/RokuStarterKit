@@ -1,0 +1,130 @@
+' Custom button component
+' Way better than native button node
+' Inspired by ios uibutton
+' To be improved further with more customizable options
+' Avoid setting borders as background us a white image with round corners
+' Color of background can be changed as per themeing requirement by setting bg poster blend color
+' Font config, color config TBD
+import "pkg:/source/AppUtilities/Utilities.bs"
+
+'
+' Start of lifecycle events
+'
+sub init()
+    m.genericBgUri = "pkg:/images/rounded-button-bg-mask.png"
+    m.container = m.top.findNode("container")
+    m.titleLabel = m.top.findNode("title")
+    m.iconPoster = m.top.findNode("icon")
+    m.bgPoster = m.top.findNode("bg")
+    m.layoutHelper = m.top.findNode("layoutHelper")
+    m.layoutContainer = m.top.findNode("layout")
+
+    ' look and feel setup
+    m.defaultColor = "0x1976D2ff"
+    m.container.color = "0xffffff00"
+    m.titleLabel.color = m.defaultColor
+    m.titleLabel.translation = [m.top.itemPadding, m.top.itemPadding]
+
+    m.top.observeField("focusedChild", "onFoucsChange")
+
+    setLayout()
+end sub
+
+'
+' Internal observer function to set text of button and call layout function to recalculate width as required
+'
+sub setTitle()
+    m.titleLabel.text = m.top.title
+    setLayout()
+end sub
+
+'
+' Internal observer function to set image/icon of button and call layout function to recalculate width as required
+'
+sub setImage()
+    if m.top.image <> invalid
+        m.iconPoster.uri = m.top.image
+        m.iconPoster.visible = true
+    else
+        m.iconPoster.uri = utils.INVALID_IMAGE_URI
+        m.iconPoster.visible = false
+    end if
+    setLayout()
+end sub
+
+'
+' Internal observer function to set inter item spacing of button text and icon and then call layout function to recalculate width as required
+'
+sub setItemSpacing()
+    m.layoutContainer.itemSpacings = [m.top.interItemSpacing]
+    setLayout()
+end sub
+
+'
+' Internal observer function to set text of button and call layout function to recalculate width as required
+'
+' @deprecated Use of border will compromise the look and feel of rounded corners
+sub setBorder(color as string)
+    m.defaultColor = color
+    utils.removeBorderFromRectangle(m.container)
+    utils.addBorderToRectangle(m.container, color)
+end sub
+
+'
+' Internal function to calculate width of items and container view and position the layout node accordingly
+'
+sub setLayout()
+    if m.top.width > 0 and m.top.height > 0
+        m.container.width = m.top.width
+        m.container.height = m.top.height
+    end if
+
+    if m.container.width <= m.titleLabel.boundingRect().width
+        m.container.width = m.titleLabel.boundingRect().width + (m.top.itemPadding * 2)
+        m.container.height = m.titleLabel.boundingRect().height + (m.top.itemPadding * 2)
+    end if
+
+    if m.top.image = invalid or m.top.image = utils.INVALID_IMAGE_URI or m.top.image = ""
+        m.iconPoster.width = 0.00
+    else
+        m.iconPoster.height = (m.container.height - (m.top.itemPadding * 2))
+        m.iconPoster.width = m.iconPoster.height
+
+        m.container.width = (m.container.width + m.top.interItemSpacing + m.iconPoster.width)
+    end if
+
+    m.layoutHelper.translation = [m.container.width / 2, m.container.height / 2]
+    m.bgPoster.width = m.container.width
+    m.bgPoster.height = m.container.height
+    ?m.iconPoster
+
+    ?"---"
+    ?m.top.image
+    ?"---"
+end sub
+
+'
+' Internal function that observes focus changes
+'
+sub onFoucsChange()
+    activeNode = m.top.focusedChild
+    if activeNode = invalid then
+        onFocusLost()
+    else
+        onFocusGained()
+    end if
+end sub
+
+'
+' Internal function called when focus is gained to set the background image
+'
+sub onFocusGained()
+    m.bgPoster.uri = m.genericBgUri
+end sub
+
+'
+' Internal function called when focus lost to remove background image
+'
+sub onFocusLost()
+    m.bgPoster.uri = utils.INVALID_IMAGE_URI
+end sub

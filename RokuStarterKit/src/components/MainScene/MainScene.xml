@@ -43,7 +43,8 @@
             <LayoutGroup vertAlignment="center"
                 horizAlignment="center"
                 translation="[960, 540]"
-                layoutDirection="vert">
+                layoutDirection="vert"
+                itemSpacings="8">
                 <Label id="tempLabel"
                     horizAlign="center"
                     translation="[0,520]"
@@ -60,6 +61,7 @@
                 </Label>
                 <Button id="PlayerNavButton"
                     text="Click" />
+                <UIButton id="PlayerNavUIButton" />
             </LayoutGroup>
         </Rectangle>
     </children>

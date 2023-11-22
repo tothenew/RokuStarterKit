@@ -13,6 +13,12 @@ sub init()
     m.global.navigationController = m.navigationController
     m.buttonPlayer = m.top.findNode("PlayerNavButton")
     m.buttonPlayer.ObserveField("buttonSelected", "gotoPlayerScreen")
+
+    ' Custom ui button component ->
+    m.playerUIButton = m.top.findNode("PlayerNavUIButton")
+    m.playerUIButton.title = "Play Video"
+    m.playerUIButton.image = "pkg:/images/icon_play.png"
+
     MainSceneExtension.initComponents()
     getHomePageData()
 end sub
