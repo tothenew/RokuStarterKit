@@ -6,6 +6,7 @@ import "pkg:/components/MainScene/MainSceneEventHandler.bs"
 import "pkg:/components/CustomComponents/Navigation/NavigationController.bs"
 import "pkg:/components/MainScene/ChannelStoreHelper/ChannelStoreHelper.bs"
 import "pkg:/source/AppUtilities/animate.bs"
+import "pkg:/source/ApiHandler/Promise.bs"
 
 sub init()
     m.top.SetFocus(true)
@@ -23,7 +24,13 @@ sub init()
     m.sidemenu = m.top.findNode("smRect")
 
     MainSceneExtension.initComponents()
-    getHomePageData()
+    '''SAMPLE API CALLS
+
+    ' Using Requests.bs = DOES NOT SUPPORT CLASS AND INSTANCE
+    MainSceneVM.fetchHomePageData()
+
+    ' Using Promise.bs = SUPPORTS CLASS AND INSTANCE
+    MainSceneVM.fetchHomePageDataWithPromise()
 end sub
 
 sub startAnimatingLeft()

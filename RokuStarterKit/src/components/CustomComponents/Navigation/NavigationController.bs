@@ -44,6 +44,9 @@ class NavigationController
 
     ' Show the current view on the screen
     private sub ShowCurrentView(action as NavAction) as dynamic
+        ' ?"!----Navigation action received +"
+        ' ?action
+
         if m.stack.count() > 0 then
             ' Get the top item from the stack
             item = m.stack[m.stack.count() - 1]

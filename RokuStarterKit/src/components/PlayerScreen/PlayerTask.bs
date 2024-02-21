@@ -53,26 +53,26 @@ sub playContentWithAds()
                 ' check for mid-roll ads
                 adPods = RAF.getAds(msg)
                 if adPods <> invalid and adPods.count() > 0
-                    print "PlayerTask: mid-roll ads, stopping video"
+                    ' print "PlayerTask: mid-roll ads, stopping video"
                     'ask the video to stop - the rest is handled in the state=stopped event below
                     video.control = "stop"
                 end if
             else if msg.GetField() = "state" then
                 curState = msg.GetData()
-                print "PlayerTask: state = "; curState
+                ' print "PlayerTask: state = "; curState
                 if curState = "stopped" then
                     if adPods = invalid or adPods.count() = 0 then
                         exit while
                     end if
 
-                    print "PlayerTask: playing midroll/postroll ads"
+                    ' print "PlayerTask: playing midroll/postroll ads"
                     keepPlaying = RAF.showAds(adPods, invalid, view)
                     adPods = invalid
                     if isPlayingPostroll then
                         exit while
                     end if
                     if keepPlaying then
-                        print "PlayerTask: mid-roll finished, seek to "; stri(curPos)
+                        ' print "PlayerTask: mid-roll finished, seek to "; stri(curPos)
                         video.visible = true
                         video.seek = curPos
                         video.control = "play"
@@ -80,13 +80,13 @@ sub playContentWithAds()
                     end if
 
                 else if curState = "finished" then
-                    print "PlayerTask: main content finished"
+                    ' print "PlayerTask: main content finished"
                     ' render post-roll ads
                     adPods = RAF.getAds(msg)
                     if adPods = invalid or adPods.count() = 0 then
                         exit while
                     end if
-                    print "PlayerTask: has postroll ads"
+                    ' print "PlayerTask: has postroll ads"
                     isPlayingPostroll = true
                     ' stop the video, the post-roll would show when the state changes to  "stopped" (above)
                     video.control = "stop"
@@ -95,5 +95,5 @@ sub playContentWithAds()
         end if
     end while
 
-    print "PlayerTask: exiting playContentWithAds()"
+    ' print "PlayerTask: exiting playContentWithAds()"
 end sub

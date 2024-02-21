@@ -10,6 +10,7 @@ sub onSetInitialFocus()
 end sub
 
 sub didGainFocus()
+    ' ?"!---- baseGroup + didGainFocus"
     if m.focusManager <> invalid
         m.focusManager.didGainFocus()
     end if

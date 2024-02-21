@@ -351,7 +351,7 @@ namespace utils
         else if vType = "roInt" or vType = "roFloat" or vType = "roString" or vType = "roBoolean" or vType = "roFunction" or vType = "roInvalid"
             n = v
         else
-            print "skipping deep copy of component type " + vType
+            ' print "skipping deep copy of component type " + vType
             n = invalid
             'n = v
         end if

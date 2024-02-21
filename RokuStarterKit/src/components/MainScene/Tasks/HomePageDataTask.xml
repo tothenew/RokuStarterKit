@@ -3,7 +3,7 @@
 <component name="HomePageDataTask"
     extends="Task">
     <interface>
-        <field id="homePageResponse"
+        <field id="output"
             type="assocarray"
             alwaysNotify="true" />
     </interface>

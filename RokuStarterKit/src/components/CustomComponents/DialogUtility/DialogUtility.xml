@@ -19,10 +19,7 @@
             type="boolean"
             alwaysNotify="true"
             onChange="onErrorDialogEnabled" />
-        <field id="disableErrorDialog"
-            type="boolean"
-            alwaysNotify="true"
-            onChange="onErrorDialogDisabled" />
+        <!-- <field id="disableErrorDialog" type="boolean" alwaysNotify="true" onChange="onErrorDialogDisabled" /> -->
         <field id="isErrorDialogVisible"
             type="boolean"
             alwaysNotify="true" />
