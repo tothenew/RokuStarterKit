@@ -8,12 +8,12 @@ namespace MainSceneVM
 
     function fetchHomePageData() as object
         m.contentLoadTask = CreateObject("roSGNode", "HomePageDataTask") ' Create XML parsing node task
-        m.contentLoadTask.observeField("homePageResponse", "MainSceneVM_homePageDataTaskResponseReceived")
+        m.contentLoadTask.observeField("output", "MainSceneVM_homePageDataTaskResponseReceived")
         m.contentLoadTask.control = "RUN" ' Run the task node
     end function
 
     function homePageDataTaskResponseReceived(msg as object)
-        if Type(msg) = "roSGNodeEvent" and msg.getField() = "homePageResponse"
+        if Type(msg) = "roSGNodeEvent" and msg.getField() = "output"
             m.contentLoadTask = invalid
             statusCode = msg.getData().statuscode
             if msg <> invalid and msg.getData() <> invalid
@@ -28,5 +28,23 @@ namespace MainSceneVM
                 ?"Error"
             end if
         end if
+    end function
+
+    function fetchHomePageDataWithPromise() as object
+        createTaskPromise("HomePageDataTask", {}).then(sub(task)
+            m.contentLoadTask = invalid
+            statusCode = task.output.statuscode
+            if task.output <> invalid
+                if statuscode = 200
+                    ?"#Success"
+                    m.homePageData = task.output.json
+                    onHomePageDataUpdate()
+                else
+                    ?"#Failure"
+                end if
+            else
+                ?"#Error"
+            end if
+        end sub)
     end function
 end namespace

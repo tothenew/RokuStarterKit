@@ -95,7 +95,7 @@ end sub
 REM : This method gets called whenever state of video player is changed
 ' ----------------------------------------------------------------
 sub taskStateChanged(event as object)
-    print "Player: taskStateChanged(), id = "; event.getNode(); ", "; event.getField(); " = "; event.getData()
+    ' print "Player: taskStateChanged(), id = "; event.getNode(); ", "; event.getField(); " = "; event.getData()
     state = event.GetData()
     if state = "done" or state = "stop"
         goBackToHomeScreen()

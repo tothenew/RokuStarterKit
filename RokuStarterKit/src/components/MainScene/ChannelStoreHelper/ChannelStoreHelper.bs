@@ -18,7 +18,7 @@ namespace StoreHelper
     end sub
 
     function initiateRFIConsentForUserdata()
-        print "Request sign-in RFI"
+        ' print "Request sign-in RFI"
         if (m.global.channelStore.userData <> invalid)
             RunSubscriptionFlow()
         else

@@ -12,5 +12,5 @@ sub loadContent()
     }
 
     r = Requests().get(endpointURL, { "headers" : headers })
-    m.top.homePageResponse = r
+    m.top.output = r
 end sub

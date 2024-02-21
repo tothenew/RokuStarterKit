@@ -17,14 +17,21 @@ class BaseFocusManager
 
     public function setFocusToActiveNode() as boolean
         if m.activeNodeBuffer <> invalid
-            m.activeNodeBuffer.setFocus(true)
-            return true
+            if type(m.activeNodeBuffer) = "roSGNode"
+                m.activeNodeBuffer.setFocus(true)
+                return true
+            else if type(m.activeNodeBuffer) = "roAssociativeArray"
+                return m.activeNodeBuffer.setFocusToActiveNode()
+            else
+                return false
+            end if
         else
             return false
         end if
     end function
 
     public sub didGainFocus()
+        ' ?"!---- baseFM + didGainFocus"
         m.setFocusToActiveNode()
     end sub
 end class

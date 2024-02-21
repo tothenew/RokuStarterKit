@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "brighterscript": "^0.65.2"
+  "devDependencies": {
+    "brighterscript": "^0.65.17"
   }
 }

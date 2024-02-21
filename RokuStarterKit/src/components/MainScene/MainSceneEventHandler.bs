@@ -1,18 +1,38 @@
 namespace MainSceneEventHandler
-    sub new()
-    end sub
-
     function handleEvent(key as RemoteButtons, press as boolean) as boolean
         if press
             if key = RemoteButtons.OK
-                m._handleOkPress()
+                _handleOkPress()
                 result = true
             end if
         end if
+
+        if key = RemoteButtons.down
+            _handleDownPress()
+        else if key = RemoteButtons.up
+            _handleUpPress()
+        else if key = RemoteButtons.left
+            startAnimatingLeft()
+        else if key = RemoteButtons.right
+            startAnimatingRight()
+        end if
+
         return true
     end function
 
     sub _handleOkPress()
         gotoPlayerScreen()
+    end sub
+
+    sub _handleDownPress()
+        if m.buttonPlayer.hasFocus() then
+            m.focusManager.setFocus(m.playerUIButton)
+        end if
+    end sub
+
+    sub _handleUpPress()
+        if m.playerUIButton.hasFocus() then
+            m.focusManager.setFocus(m.buttonPlayer)
+        end if
     end sub
 end namespace

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+
+<component name="UIButton"
+    extends="Group">
+
+    <interface>
+        <field id="width"
+            type="float"
+            alwaysNotify="true"
+            onChange="setLayout" />
+        <field id="height"
+            type="float"
+            alwaysNotify="true"
+            onChange="setLayout" />
+        <field id="title"
+            type="string"
+            alwaysNotify="true"
+            onChange="setTitle" />
+        <field id="itemPadding"
+            type="float"
+            value="24.0"
+            onChange="setLayout" />
+        <field id="image"
+            type="string"
+            onChange="setImage" />
+        <field id="interItemSpacing"
+            type="float"
+            onChange="setItemSpacing"
+            value="12.0" />
+    </interface>
+
+    <children>
+        <Poster id="bg">
+            <Rectangle id="container">
+                <Rectangle id="layoutHelper"
+                    color="0x00ff0000"
+                    width="4"
+                    height="4">
+                    <LayoutGroup id="layout"
+                        layoutDirection="horiz"
+                        vertAlignment="center"
+                        horizAlignment="center"
+                        itemSpacings="[12.0]">
+                        <Poster id="icon"
+                            visible="false"
+                            loadHeight="96"
+                            loadWidth="96"
+                            loadDisplayMode="scaleToFill" />
+                        <Label id="title"
+                            font="font:LargeSystemFont"
+                            horizAlign="center"
+                            vertAlign="center"
+                            text="" />
+                    </LayoutGroup>
+                </Rectangle>
+            </Rectangle>
+        </Poster>
+    </children>
+</component>
